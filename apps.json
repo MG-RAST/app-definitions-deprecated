@@ -258,7 +258,7 @@
 		}
 	},
 	"CAP" : {
-		"dockerimage" : "skyport/cap:20141016",
+		"dockerimage" : "skyport/cap:20141016b",
 		"commands" : {
 			"coverage-bed-reference" : {
 				"default" : {
@@ -399,7 +399,7 @@
 		
 	},
 	"Samtools" : {
-		"dockerimage" : "skyport/cap:20141016",
+		"dockerimage" : "skyport/cap:20141016b",
 		"commands" : {
 			"samtools" : {
 				"view" : {
@@ -425,7 +425,7 @@
 		}
 	},
 	"Bedtools" : {
-		"dockerimage" : "skyport/cap:20141016",
+		"dockerimage" : "skyport/cap:20141016b",
 		"commands" : {
 			"bedtools" : {
 				"bamtobed" : {
