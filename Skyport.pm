@@ -70,7 +70,7 @@ sub commandline_docker2shock {
 	
 	my $image_tarfile = $datadir.$image_obj->{'Id'}.'_'.$print_name.'.tar';
 	
-	save_image_to_tar($image_obj->{'Id'}, $image_tarfile);
+	save_image_to_tar($image_obj->{'Id'}, $image_tarfile, $h);
 	
 	
 	#### modify image (add tags)
@@ -179,9 +179,9 @@ sub buildDockerImage {
 		
 		print Dumper($result_hash);
 		print "image already exists:\n";
-		print "ID: ".$image_id." $repotag   (may reuse with --docker_reuse_image)\n";
+		print "ID: ".$image_id." $repotag   (may reuse with --cache)\n";
 		
-		unless (defined $h->{'docker_reuse_image'}) {
+		unless (defined $h->{'cache'}) {
 			print "to delete it run docker rmi ".$image_id."\n";
 			exit(1);
 		}
@@ -215,6 +215,7 @@ sub buildDockerImage {
 		my $docker_build_cmd;
 		
 		my $cache = '';
+		die;
 		if (defined ($h->{'no-cache'})) {
 			$cache = ' --no-cache=true ';
 		}
@@ -283,7 +284,7 @@ sub buildDockerImage {
 }
 
 sub createAndSaveDiffImage {
-	my ($image_id, $repo, $tag, $docker_base_image) = @_;
+	my ($image_id, $repo, $tag, $docker_base_image, $h) = @_;
 	### save image as tar archive file
 	
 	my $repotag = $repo.':'.$tag;
@@ -304,7 +305,7 @@ sub createAndSaveDiffImage {
 	
 	
 	#### SAVE IMAGE
-	save_image_to_tar($image_id, $image_tarfile);
+	save_image_to_tar($image_id, $image_tarfile, $h);
 	
 	unless (defined $repotag) {
 		die;
@@ -334,13 +335,13 @@ sub save_image_to_tar {
 	my $skip_saving = 0;
 	
 	
-	if (defined $h->{'docker_reuse_image'}) {
+	if (defined $h->{'cache'}) {
 		if (-e $image_tarfile) {
 			$skip_saving = 1;
 		}
 	} else {
 		if (-e $image_tarfile) {
-			die "docker image file $image_tarfile already exists. Delete or use --docker_reuse_image";
+			die "docker image file $image_tarfile already exists. Delete or use --cache";
 		}
 	}
 	

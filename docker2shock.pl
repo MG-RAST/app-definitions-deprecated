@@ -24,7 +24,10 @@ my $help_text;
 	'authors' => 'Wolfgang Gerlach',
 	'options' => [
 	'options',
-	['debug', 	'debug']
+	['private', 	'make shock node private, public is here default'],
+	['cache', 		'use existing image files from disk'],
+	['docker_noupload',		''],
+	['debug', 		'debug']
 #'docker2shock',
 #['docker2shock=s',		'upload image from docker to shock, this does not remove the baseimage!']
 ]);
