@@ -832,5 +832,51 @@ sub get_diff_layers {
 	return @diff_layers;
 }
 
+
+sub get_docker_version {
+	unless (defined $docker_version_info) {
+		
+		my $result_hash = dockerSocket('GET', "/version");
+		unless (defined $result_hash) {
+			die;
+		}
+		$docker_version_info = $result_hash;
+	}
+	return $docker_version_info;
+}
+
+sub read_name_from_tar_image {
+	
+	my ($image_tarfile) = @_;
+	
+	# extract all jsons: tar -xvOf $image_tarfile --wildcards '*/json'
+	#my $tar_extr = "tar -xvOf $image_tarfile ".$image_id.'/json';
+	
+	my $z;
+	
+	if ($image_tarfile =~ /\.tar$/) {
+		$z = '';
+	} elsif ($image_tarfile =~ /\.tar\.gz$/) {
+		$z = 'z';
+	} elsif ($image_tarfile =~ /\.tgz$/) {
+		$z = 'z';
+	} else {
+		die;
+	}
+	
+	
+	my $tar_extr = "tar -x".$z."vOf $image_tarfile 'repositories'";
+	
+	my $tar_json = `$tar_extr`;
+	
+	print "json has: ".$tar_json."\n";
+	
+	my $json = JSON->new;
+	my $tar_hash = $json->decode( $tar_json );
+	print Dumper($tar_hash);
+	return $tar_hash;
+	
+}
+
 1;
 
