@@ -6,6 +6,9 @@ use warnings;
 use LWP::UserAgent;
 use JSON;
 
+use SHOCK::Client;
+use LWP::Protocol::http::SocketUnixAlt;
+
 use Data::Dumper;
 
 1;
@@ -514,8 +517,6 @@ sub upload_docker_image_to_shock {
 	my $repotag = $repo.':'.$tag;
 	
 	
-	require SHOCK::Client;
-	
 	
 	unless (defined($token)) {
 		die 'SHOCK token not found';
@@ -654,7 +655,7 @@ sub dockerSocket {
 	
 	my $agent = LWP::UserAgent->new;
 	
-	require LWP::Protocol::http::SocketUnixAlt;
+	#require LWP::Protocol::http::SocketUnixAlt;
 	LWP::Protocol::implementor( http => 'LWP::Protocol::http::SocketUnixAlt' );
 	
 	
@@ -709,7 +710,7 @@ sub dockerSocket {
 sub findImageinShock {
 	my ($shock_server, $token, $image_id) = @_;
 	
-	require SHOCK::Client;
+	
 	
 	
 	my $shock = new SHOCK::Client($shock_server, $token);
