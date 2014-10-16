@@ -281,14 +281,19 @@
 					"input" : [
 							   {
 							   "type"	: "file",
-							   "name"	: "INPUT",
+							   "name"	: "BEDFILE",
+							   "description" : ""
+							   },
+							   {
+							   "type"	: "file",
+							   "name"	: "READSFILE",
 							   "description" : ""
 							   }
 							   ],
 					"cmd_script" : [
-									"python /cap/scripts/get-rpkm.py ${INPUT}"
+									"python /cap/scripts/get-rpkm.py ${BEDFILE} ${READSFILE}"
 									],
-					"output_array" : ["${INPUT}.rpkm"]
+					"output_array" : ["${BEDFILE}.rpkm"]
 				}
 			},
 			"final" : {
