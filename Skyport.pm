@@ -336,12 +336,16 @@ sub save_image_to_tar {
 	
 	
 	if (defined $h->{'cache'}) {
-		if (-e $image_tarfile) {
+		if (-e $image_tarfile || -e $image_tarfile.'.gz') {
 			$skip_saving = 1;
 		}
 	} else {
 		if (-e $image_tarfile) {
 			die "docker image file $image_tarfile already exists. Delete or use --cache";
+		}
+		
+		if (-e $image_tarfile.'.gz') {
+			die "docker image file ".$image_tarfile.".gz already exists. Delete or use --cache";
 		}
 	}
 	
