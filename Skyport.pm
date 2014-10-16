@@ -76,8 +76,16 @@ sub commandline_docker2shock {
 	#### modify image (add tags)
 	#print "### modify image\n";
 	#my $imagediff_tar_gz = remove_base_from_image_and_set_tag($image_tarfile, $repo, $tag, $image_id, $base_image_object);
-	systemp("gzip ".$image_tarfile)==0 or die;
 	
+	my $do_gzip = 1;
+	if (defined $h->{'cache'} && -e $image_tarfile.".gz") {
+		$do_gzip = 0;
+	}
+	
+	if ($do_gzip) {
+		systemp("gzip ".$image_tarfile)==0 or die;
+	}
+		
 	##### upload
 	print "### upload image\n";
 	
