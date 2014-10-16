@@ -25,6 +25,13 @@ if ($datadir eq "") {
 	die;
 }
 
+
+
+sub systemp {
+	print "cmd: ".join(' ', @_)."\n";
+	return system(@_);
+}
+
 sub commandline_docker2shock {
 	my ($shock_server, $shocktoken, $h, $image_identifer, $base_image_object) = @_;
 	
