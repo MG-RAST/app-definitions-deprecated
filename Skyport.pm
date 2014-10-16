@@ -27,7 +27,8 @@ sub commandline_docker2shock {
 	
 	
 	unless (defined $shocktoken) {
-		die "no shocktoken";
+		print STDERR "no shocktoken";
+		return;
 	}
 	
 	#### save image
