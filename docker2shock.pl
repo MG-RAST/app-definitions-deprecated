@@ -35,7 +35,17 @@ if ($h->{'help'} ) { # || keys(%$h)==0
 	exit(0);
 }
 
-my $image_identifer = $ARGV[0];
-my $shocktoken = $ENV{KB_AUTH_TOKEN};
+#SHOCK_SERVER_URL=http://shock.metagenomics.anl.gov:80
+$ENV{SHOCK_SERVER_URL} ='http://shock.metagenomics.anl.gov:80';
 
-Skyport::commandline_docker2shock($shocktoken, $image_identifer);
+my $image_identifer = $ARGV[0];
+
+
+unless (defined $image_identifer) {
+	die "no image specified";
+}
+
+my $shocktoken = $ENV{KB_AUTH_TOKEN};
+my $shock_server = $ENV{SHOCK_SERVER_URL};
+
+Skyport::commandline_docker2shock($shock_server, $shocktoken, $h, $image_identifer);
