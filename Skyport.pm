@@ -6,6 +6,8 @@ use warnings;
 use LWP::UserAgent;
 use JSON;
 
+use Data::Dumper;
+
 1;
 
 my $docker_socket = '/var/run/docker.sock';
