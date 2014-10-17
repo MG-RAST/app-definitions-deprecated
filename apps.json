@@ -318,6 +318,8 @@
 							   }
 							   ],
 					"cmd_script" : [
+									"set -e",
+									"set -x",
 									"python /cap/scripts/merge.py *rpkm",
 									"curl \"http://api.metagenomics.anl.gov/1/annotation/similarity/${MGMID}?type=ontology&source=Subsystems\" > annotations.txt",
 									"python /cap/scripts/best-hit.py annotations.txt",
