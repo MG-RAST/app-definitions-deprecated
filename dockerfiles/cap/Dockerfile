@@ -14,5 +14,5 @@ ENV PATH $PATH:/cap/scripts
 
 RUN pip install screed && pip install numpy
 
-RUN R --vanilla --slave < /cap/dockerfiles/cap/install_packages.r
+RUN R --vanilla --slave < /cap/scripts/install_packages.r
 
