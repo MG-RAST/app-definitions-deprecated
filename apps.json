@@ -260,6 +260,14 @@
 	"CAP" : {
 		"dockerimage" : "skyport/cap:20141017",
 		"commands" : {
+			"test" : {
+				"default" : {
+					"cmd_script" : [
+									"echo hello world"
+									],
+					"output_array" : ["awe_stdout.txt"]
+				}
+			},
 			"coverage-bed-reference" : {
 				"default" : {
 					"input" : [
