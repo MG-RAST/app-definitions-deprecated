@@ -329,7 +329,7 @@
 									"set -e",
 									"set -x",
 									"python /cap/scripts/merge.py *rpkm",
-									"curl \"http://api.metagenomics.anl.gov/1/annotation/similarity/${MGMID}?type=ontology&source=Subsystems\" > annotations.txt",
+									"curl -H auth:\"${datatoken}\" \"http://api.metagenomics.anl.gov/1/annotation/similarity/${MGMID}?type=ontology&source=Subsystems\" > annotations.txt",
 									"python /cap/scripts/best-hit.py annotations.txt > annotations.txt.besthits",
 									"R < /cap/scripts/core.R --vanilla"
 									],
