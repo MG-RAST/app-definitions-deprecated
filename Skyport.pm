@@ -70,6 +70,7 @@ sub commandline_docker2shock {
 	
 	my $image_tarfile = $datadir.$image_obj->{'Id'}.'_'.$print_name.'.tar';
 	
+	
 	save_image_to_tar($image_obj->{'Id'}, $image_tarfile, $h);
 	
 	
@@ -554,7 +555,9 @@ sub upload_docker_image_to_shock {
 	my $node_attributes = {
 		#	"temporary"				=> "1",
 		"type"					=> "dockerimage",
-		"name"					=> $repotag						|| die,
+		"name"					=> $repotag						|| die, # deprecated
+		"repository"			=> $repo						|| die,
+		"tag"					=> $tag							|| die,
 		"id"					=> $image_id					|| die,
 		"docker_version"		=> $image_docker_version_hash	|| die,
 		"base_image_tag"		=> $base_image_object->{'name'} || "",
