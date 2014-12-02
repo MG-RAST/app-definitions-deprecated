@@ -1,0 +1,39 @@
+{
+	"dockerimage" : "qiime:1.8.0-amd64u",
+	"commands" : {
+		"pick_closed_reference_otus" : {
+			"default" : {
+				"input" : [
+						   {	"type"	: "file",
+						   "name"	: "INPUT-FILE",
+						   "required" : true
+						   },
+						   {	"type"	: "file",
+						   "name"	: "INPUT-PARAMETER",
+						   "required" : true
+						   },
+						   {	"type"	: "string",
+						   "name"	: "IDENTITY",
+						   "default_value" : "97",
+						   "description" : "percent identity"
+						   },
+						   {	"type"	: "string",
+						   "name"	: "OUTPUT-DIR",
+						   "default_value" : "ucr",
+						   "description" : "output directory"
+						   }
+						   ],
+				"output_array" : ["${OUTPUT-DIR}/otu_table.biom"],
+				"output_map" : {},
+				"cmd_interpreter" : "/bin/bash",
+				"cmd_script" :
+				[
+				 "source /home/qiime/qiime_software/activate.sh",
+				 "pick_closed_reference_otus.py -i ${INPUT-FILE} -o ${OUTPUT-DIR} -p ${INPUT-PARAMETER} -r /home/qiime/qiime_software/gg_otus-13_8-release/rep_set/${IDENTITY}_otus.fasta"
+				 ],
+				"example" : "QIIME.pick_closed_reference_otus(input.fas, param.txt, IDENTITY=90)",
+				"example_interface" : "file INPUT-FILE, file INPUT-PARAMETER, number IDENTITY=97, string OUTPUT-DIR=ucr, file *array, **dict"
+			}
+		}
+	}
+}
