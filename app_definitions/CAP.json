@@ -1,0 +1,81 @@
+{
+	"dockerimage" : "skyport/cap:20141029",
+	"commands" : {
+		"test" : {
+			"default" : {
+				"cmd_script" : [
+								"echo hello world"
+								],
+				"output_array" : ["awe_stdout.txt"]
+			}
+		},
+		"coverage-bed-reference" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "INPUT",
+						   "description" : "input FASTA file"
+						   }
+						   ],
+				"cmd_script" : [
+								"python /cap/scripts/coverage-bed-reference.py ${INPUT}"
+								],
+				"output_array" : ["${INPUT}.bed"]
+			}
+			
+		},
+		"get-rpkm" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "BEDFILE",
+						   "description" : ""
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "READSFILE",
+						   "description" : ""
+						   }
+						   ],
+				"cmd_script" : [
+								"python /cap/scripts/get-rpkm.py ${BEDFILE} ${READSFILE}"
+								],
+				"output_array" : ["${BEDFILE}.rpkm"]
+			}
+		},
+		"final" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "string",
+						   "name"	: "MGMID",
+						   "default_value" : "mgm identifier"
+						   },
+						   {
+						   "type"	: "list",
+						   "name"	: "RPKM-FILES",
+						   "description" : ""
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "METATXT",
+						   "filename" : "meta.txt",
+						   "description" : "",
+						   "optional" : true
+						   }
+						   ],
+				"cmd_script" : [
+								"set -e",
+								"set -x",
+								"python /cap/scripts/merge.py *rpkm",
+								"curl -H auth:\"${datatoken}\" \"http://api.metagenomics.anl.gov/1/annotation/similarity/${MGMID}?type=ontology&source=Subsystems\" > annotations.txt",
+								"python /cap/scripts/best-hit.py annotations.txt > annotations.txt.besthits",
+								"R < /cap/scripts/core.R --vanilla"
+								],
+				"output_array" : ["metag.RData"]
+			}
+		}
+	}
+}

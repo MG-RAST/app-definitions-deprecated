@@ -1,0 +1,61 @@
+{
+	"dockerimage" : "picrust:1.0.0",
+	"commands" : {
+		"normalize_by_copy_number" : {
+			"default" : {
+				"input" : [
+						   {	"type"	: "file",
+						   "name"	: "INPUT",
+						   "required" : true,
+						   "description" : "input biom file"
+						   }
+						   ],
+				"cmd_script" :
+				[
+				 "mkdir -p /usr/local/lib/python2.7/dist-packages/picrust/data/",
+				 "ln -s /db/16S_13_5_precalculated.tab.gz  /usr/local/lib/python2.7/dist-packages/picrust/data/16S_13_5_precalculated.tab.gz",
+				 "ln -s /db/ko_13_5_precalculated.tab.gz  /usr/local/lib/python2.7/dist-packages/picrust/data/ko_13_5_precalculated.tab.gz",
+				 "normalize_by_copy_number.py -i @${INPUT} -o ${OUTPUT-FILE}"
+				 ],
+				"output_array" : ["${OUTPUT-FILE}"],
+				"variables" : [{ "OUTPUT-FILE" : "${remove_extension:${INPUT}}.normalized.biom"}],
+				"predata": {
+					"ko_13_5_precalculated.tab.gz":{
+						"url" : "http://shock.metagenomics.anl.gov:80/node/e91dd6b3-69b0-4e1f-9cb0-1b94fb9864d0?download"
+					},
+					"16S_13_5_precalculated.tab.gz" : {
+						"url" : "http://shock.metagenomics.anl.gov:80/node/ac5952b4-cb43-410c-b545-8855131df518?download"
+					}
+				}
+			}
+		},
+		"predict_metagenomes" : {
+			"default" : {
+				"input" : [
+						   {	"type"	: "file",
+						   "name"	: "INPUT",
+						   "required" : true,
+						   "description" : "normalized input biom file"
+						   }
+						   ],
+				"cmd_script" :
+				[
+				 "mkdir -p /usr/local/lib/python2.7/dist-packages/picrust/data/",
+				 "ln -s /db/16S_13_5_precalculated.tab.gz  /usr/local/lib/python2.7/dist-packages/picrust/data/16S_13_5_precalculated.tab.gz",
+				 "ln -s /db/ko_13_5_precalculated.tab.gz  /usr/local/lib/python2.7/dist-packages/picrust/data/ko_13_5_precalculated.tab.gz",
+				 "predict_metagenomes.py -i @${INPUT} -o ${OUTPUT-FILE}"
+				 ],
+				"output_array" : ["${OUTPUT-FILE}"],
+				"variables" : [{ "OUTPUT-FILE" : "${remove_extension:${INPUT}}.picrust.biom"}],
+				"predata": {
+					"ko_13_5_precalculated.tab.gz":{
+						"url" : "http://shock.metagenomics.anl.gov:80/node/e91dd6b3-69b0-4e1f-9cb0-1b94fb9864d0?download"
+					},
+					"16S_13_5_precalculated.tab.gz" : {
+						"url" : "http://shock.metagenomics.anl.gov:80/node/ac5952b4-cb43-410c-b545-8855131df518?download"
+					}
+				}
+			}
+		}
+	}
+}

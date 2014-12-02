@@ -1,0 +1,82 @@
+{
+	"dockerimage" : "mgrast/base:latest",
+	"commands" : {
+		"preprocess" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "inputfile",
+						   "shockindex": "record"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "file_format"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "job_id"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "filter_options"
+						   }
+						   
+						   ],
+				"cmd_script" :
+				[
+				 "source /root/mgrast_env.sh",
+				 "awe_preprocess.pl -input ${inputfile} -format ${file_format} -out_prefix ${job_id}.100.preprocess -filter_options ${filter_options}"
+				 ],
+				"output_map" : {
+					"passed" : {
+						"filename" : "[% job_id %].100.preprocess.passed.fna",
+						"attrfile": "[% job_id %].100.preprocess.passed.fna.json"
+					},
+					"removed" : {
+						"filename" : "[% job_id %].100.preprocess.removed.fna",
+						"attrfile": "[% job_id %].100.preprocess.removed.fna.json"
+					}
+				}
+			}
+		},
+		"dereplicate" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "inputfile"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "job_id"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "prefix_length"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "dereplicate"
+						   }
+						   ],
+				"cmd_script" :
+				[
+				 "source /root/mgrast_env.sh",
+				 "awe_dereplicate.pl -input=${inputfile} -out_prefix=${job_id}.150.dereplication -prefix_length=${prefix_length} -dereplicate=${dereplicate} -memory=20"
+				 ],
+				"output_map" : {
+					"passed" : {
+						"filename" : "${job_id}.150.dereplication.passed.fna",
+						"attrfile" : "${job_id}.150.dereplication.passed.fna.json"
+					},
+					"removed" : {
+						"filename" : "${job_id}.150.dereplication.removed.fna",
+						"attrfile" : "${job_id}.150.dereplication.removed.fna.json"
+					}
+				}
+			}
+			
+		}
+	}
+}

@@ -1,0 +1,31 @@
+{
+	"dockerimage" : "mgrasttools:20140701",
+	"commands" : {
+		"mg-kegg2ss" : {
+			"default" : {
+				"input" : [
+						   {	"type"	: "file",
+						   "name"	: "INPUT",
+						   "description" : "input biom file"
+						   },
+						   {	"type"	: "string",
+						   "name"	: "OUTPUT-FILE-NAME",
+						   "default_value" : "kegg2ss.txt"
+						   },
+						   {	"type"	: "string",
+						   "name"	: "OUTPUT-TYPE",
+						   "default_value" : "biom",
+						   "valid_values" : ["biom", "text"],
+						   "description" : "biom or text for tabbed table"
+						   }
+						   ],
+				"cmd_script" :
+				[
+				 "source /python_env",
+				 "mg-kegg2ss.py --input ${INPUT} --output ${OUTPUT-TYPE} > ${OUTPUT-FILE-NAME}"
+				 ],
+				"output_array" : ["${OUTPUT-FILE-NAME}"]
+			}
+		}
+	}
+}

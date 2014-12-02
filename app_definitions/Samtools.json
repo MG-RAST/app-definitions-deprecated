@@ -1,0 +1,26 @@
+{
+	"dockerimage" : "skyport/cap:20141029",
+	"commands" : {
+		"samtools" : {
+			"view" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "INPUT",
+						   "description" : "SAM or BAM input"
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "REFERENCE",
+						   "description" : "input FASTA file"
+						   }
+						   ],
+				"cmd_script" : [
+								"samtools view -b -t ${REFERENCE} ${INPUT} -o ${INPUT}.bam"
+								],
+				"output_array" : ["${INPUT}.bam"]
+			}
+			
+		}
+	}
+}

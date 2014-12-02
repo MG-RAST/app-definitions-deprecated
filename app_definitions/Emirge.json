@@ -1,0 +1,84 @@
+{
+	"dockerimage" : "wgerlach/emirge:20130227",
+	"_dockerimage" : "wgerlach/emirge:0.60",
+	"dockerimages" : {
+		"0.60" 		: "wgerlach/emirge:0.60",
+		"20130227" 	: "wgerlach/emirge:20130227"
+	},
+	"commands" : {
+		"emirge" : {
+			"default" : {
+				"input" : [
+						   {	"type"	: "file",
+						   "name"	: "INPUT1",
+						   "description" : "input biom file"
+						   },
+						   {	"type"	: "file",
+						   "name"	: "INPUT2",
+						   "optional" : true,
+						   "option" : "-2 ",
+						   "description" : "input biom file, second read in mate-pairs"
+						   },
+						   {	"type"	: "string",
+						   "name"	: "insert_mean",
+						   "default_value" : "180",
+						   "description" : "insert size mean"
+						   },
+						   {	"type"	: "string",
+						   "name"	: "insert_stddev",
+						   "default_value" : "20",
+						   "description" : "insert standard deviation"
+						   },
+						   {	"type"	: "string",
+						   "name"	: "max_read_length",
+						   "default_value" : "110",
+						   "description" : "maximal read length"
+						   },
+						   {	"type"	: "string",
+						   "name"	: "processors",
+						   "default_value" : "${NumCPU}",
+						   "description" : "number of processor to use, default all"
+						   },
+						   {	"type"	: "string",
+						   "name"	: "iterations",
+						   "default_value" : "40",
+						   "valid_values" : ["00", "01", "10", "20", "30", "40"],
+						   "description" : "number of iterations"
+						   }
+						   ],
+				"cmd_script" :
+				[
+				 "set -xe",
+				 "emirge.py outdir -1 ${INPUT1} ${option:INPUT2}} -f ./SSURef_111_candidate_db.fasta -b ./SSU_candidate_db_btindex --insert_mean=${insert_mean} --insert_stddev=${insert_stddev} --max_read_length=${max_read_length} --processors=${processors} --phred33 --iterations=${iterations}",
+				 "apt-get --force-yes -y install python-biopython",
+				 "emirge_rename_fasta.py outdir/iter.${iterations} > emirge.fas"
+				 ],
+				"output_array" : ["emirge.fas"],
+				"predata": {
+					"SSU_candidate_db_btindex.1.ebwt":{
+						"url" : "http://shock.metagenomics.anl.gov:80/node/e401783f-7f9b-486a-ad64-1d8cc8c5e3a6?download"
+					},
+					"SSU_candidate_db_btindex.2.ebwt" : {
+						"url" : "http://shock.metagenomics.anl.gov:80/node/2ae51a86-2dc3-46cb-8f90-0a6e103cf857?download"
+					},
+					"SSU_candidate_db_btindex.3.ebwt" : {
+						"url" : "http://shock.metagenomics.anl.gov:80/node/c6382101-c67d-4f05-b05e-8a863d6c2abb?download"
+					},
+					"SSU_candidate_db_btindex.4.ebwt" : {
+						"url" : "http://shock.metagenomics.anl.gov:80/node/490f51f0-5b39-4b93-ba3d-1caadbdd5e54?download"
+					},
+					"SSU_candidate_db_btindex.rev.1.ebwt" : {
+						"url" : "http://shock.metagenomics.anl.gov:80/node/e680556c-751a-4a59-b5ad-be20a1614cb2?download"
+					},
+					"SSU_candidate_db_btindex.rev.2.ebwt" : {
+						"url" : "http://shock.metagenomics.anl.gov:80/node/951420f9-4c87-44a7-ac56-c94cd06e2166?download"
+					},
+					"SSURef_111_candidate_db.fasta" : {
+						"url" : "http://shock.metagenomics.anl.gov:80/node/44784ee0-12eb-49c0-b609-76ee30d152af?download"
+					}
+				}
+			}
+		}
+		
+	}
+}

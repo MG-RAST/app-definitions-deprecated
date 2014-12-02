@@ -1,0 +1,58 @@
+{
+	"dockerimage" : "mgrast/bowtie:latest",
+	"commands" : {
+		"bowtie" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "inputfile"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "job_id"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "screen_indexes"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "bowtie"
+						   },
+						   ],
+				"cmd_script" :
+				[
+				 "awe_bowtie_screen.pl -input=${inputfile} -output=${job_id}.299.screen.passed.fna -index=${screen_indexes} -bowtie=${bowtie} -proc=8"
+				 ],
+				"output_map" : {
+					"passed" : {
+						"filename" : "[% job_id %].299.screen.passed.fna"
+					}
+					
+				}
+				"predata" : {
+					"h_sapiens.2.bt2" : {
+						"url" : "http://shock.metagenomics.anl.gov/node/87eeeac0-b3df-4872-9a71-8f5a984a78f0?download"
+					},
+					"h_sapiens.1.bt2" : {
+						"url" : "http://shock.metagenomics.anl.gov/node/12c7a5dc-7859-43cb-a7a0-42a7d2ec3d29?download"
+					},
+					"h_sapiens.rev.2.bt2" : {
+						"url" : "http://shock.metagenomics.anl.gov/node/bd6a2f1d-87fb-42eb-a1ce-fb506b8da65a?download"
+					},
+					"h_sapiens.3.bt2" : {
+						"url" : "http://shock.metagenomics.anl.gov/node/ea8914ab-7425-401f-9a86-5e10210e10b4?download"
+					},
+					"h_sapiens.rev.1.bt2" : {
+						"url" : "http://shock.metagenomics.anl.gov/node/88a60d6f-8281-4b77-b86e-c8ca8b21b049?download"
+					},
+					"h_sapiens.4.bt2" : {
+						"url" : "http://shock.metagenomics.anl.gov/node/95da2457-d214-4357-b039-47ef84387ae6?download"
+					}
+				}
+			}
+		}
+		
+	}
+}

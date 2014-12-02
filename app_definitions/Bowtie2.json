@@ -1,0 +1,70 @@
+{
+	"dockerimage" : "skyport/bowtie2:2.1.0",
+	"commands" : {
+		"bowtie2-build" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "INPUT",
+						   "description" : "input FASTA file to create database of"
+						   }
+						   ],
+				"variables" : [{ "PREFIX" : "${remove_extension:${INPUT}}.bowtie_db"}],
+				"cmd_script" : [
+								"bowtie2-build ${INPUT} ${PREFIX}"
+								],
+				"output_array" : ["${PREFIX}.1.bt2", "${PREFIX}.2.bt2", "${PREFIX}.3.bt2", "${PREFIX}.4.bt2", "${PREFIX}.rev.1.bt2", "${PREFIX}.rev.2.bt2"]
+			}
+		},
+		"bowtie2" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "INPUT",
+						   "description" : "input FASTA file to map"
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "DB.1.bt2",
+						   "description" : "bowtie database file"
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "DB.2.bt2",
+						   "description" : "bowtie database file"
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "DB.3.bt2",
+						   "description" : "bowtie database file"
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "DB.4.bt2",
+						   "description" : "bowtie database file"
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "DB.rev.1.bt2",
+						   "description" : "bowtie database file"
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "DB.rev.2.bt2",
+						   "description" : "bowtie database file"
+						   }
+						   ],
+				"variables" : [{ "DBPREFIX" : "${remove_extension:${remove_extension:${DB.1.bt2}}}",
+							   "OUTPUT" : "${remove_extension:${INPUT}}.sam"
+							   }],
+				"cmd_script" : [
+								"bowtie2 -x ${DBPREFIX} -f ${INPUT} -S ${OUTPUT}"
+								],
+				"output_array" : ["${OUTPUT}"]
+			}
+		}
+	}
+	
+}

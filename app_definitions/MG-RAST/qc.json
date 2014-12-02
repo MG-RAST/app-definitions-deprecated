@@ -1,0 +1,50 @@
+{
+	"dockerimage" : "mgrast/qc:latest",
+	"commands" : {
+		"qc" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "inputfile"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "file_format"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "job_id"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "assembled"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "filter_options"
+						   }
+						   ],
+				"cmd_script" :
+				[
+				 "source /root/mgrast_env.sh",
+				 "awe_qc.pl -input ${inputfile} -format ${file_format} -out_prefix ${job_id}.075 -assembled ${assembled} -filter_options ${filter_options} -proc 8"
+					],
+				"output_map" : {
+					"assembly-coverage" : {
+						"filename" : "${job_id}.075.assembly.coverage",
+						"attrfile" : "${job_id}.075.assembly.coverage.json"
+					},
+					"qc-stats" : {
+						"filename" : "${job_id}.075.qc.stats",
+						"attrfile" : "${job_id}.075.qc.stats.json"
+					},
+					"upload-stats" : {
+						"filename" : "${job_id}.075.upload.stats",
+						"attrfile" : "${job_id}.075.upload.stats.json"
+					}
+				}
+			}
+		}
+	}
+}

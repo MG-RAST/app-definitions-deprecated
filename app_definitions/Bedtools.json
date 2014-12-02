@@ -1,0 +1,42 @@
+{
+	"dockerimage" : "skyport/cap:20141029",
+	"commands" : {
+		"bedtools" : {
+			"bamtobed" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "INPUT",
+						   "description" : "BAM input"
+						   }
+						   ],
+				"cmd_script" : [
+								"bedtools bamtobed ${OPTIONS} -i ${INPUT} > ${INPUT}.bed"
+								],
+				"output_array" : ["${INPUT}.bed"],
+				"help" : "bedtools bamtobed",
+				"options_prefix" : " -"
+			}
+		},
+		"coverageBed" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "INPUT",
+						   "description" : ""
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "BEDFILE",
+						   "description" : ""
+						   }
+						   ],
+				"cmd_script" : [
+								"coverageBed -a ${INPUT} -b ${BEDFILE} > ${INPUT}.reads.mapped"
+								],
+				"output_array" : ["${INPUT}.reads.mapped"]
+			}
+		}
+	}
+}
