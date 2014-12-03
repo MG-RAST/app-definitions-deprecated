@@ -1,0 +1,39 @@
+{
+	"dockerimage" : "mgrast/genecall:latest",
+	"commands" : {
+		"genecall" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "inputfile",
+						   "shockindex": "record",
+						   "split" : true
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "job_id"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "fgs_type"
+						   }
+				],
+				"cmd_script" :
+				[
+				"awe_genecalling.pl -input=${inputfile} -out_prefix=${job_id}.350.genecalling.coding -type=${fgs_type} -size=100 -proc=8"
+				],
+				"output_map" : {
+					"coding-faa" : {
+						"filename" : "${job_id}.350.genecalling.coding.faa",
+						"attrfile": "userattr.json"
+					},
+					"coding-fna" : {
+						"filename" : "${job_id}.350.genecalling.coding.fna",
+						"attrfile": "userattr.json"
+					}
+				}
+			}
+		}
+	}
+}
