@@ -1,17 +1,14 @@
 {
 	"dockerimage" : "mgrast/base:latest",
+	"_note" : "preprocess has modes for fasta and fastq and produces different output nodes",
 	"commands" : {
 		"preprocess" : {
-			"default" : {
+			"fastq" : {
 				"input" : [
 						   {
 						   "type"	: "file",
 						   "name"	: "inputfile",
 						   "shockindex": "record"
-						   },
-						   {
-						   "type"	: "string",
-						   "name"	: "file_format"
 						   },
 						   {
 						   "type"	: "string",
@@ -26,16 +23,54 @@
 				"cmd_script" :
 				[
 				 "source /root/mgrast_env.sh",
-				 "awe_preprocess.pl -input ${inputfile} -format ${file_format} -out_prefix ${job_id}.100.preprocess -filter_options ${filter_options}"
+				 "awe_preprocess.pl -input ${inputfile} -format fastq -out_prefix ${job_id}.100.preprocess -filter_options ${filter_options}"
 				 ],
 				"output_map" : {
 					"passed" : {
-						"filename" : "[% job_id %].100.preprocess.passed.fna",
-						"attrfile": "[% job_id %].100.preprocess.passed.fna.json"
+						"filename" : "${job_id}.100.preprocess.passed.fna",
+						"attrfile": "${job_id}.100.preprocess.passed.fna.json",
+						"shockindex": "record"
 					},
 					"removed" : {
-						"filename" : "[% job_id %].100.preprocess.removed.fna",
-						"attrfile": "[% job_id %].100.preprocess.removed.fna.json"
+						"filename" : "${job_id}.100.preprocess.removed.fna",
+						"attrfile": "${job_id}.100.preprocess.removed.fna.json"
+					}
+				}
+			},
+			"fasta" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "inputfile",
+						   "shockindex": "record"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "job_id"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "filter_options"
+						   }
+						   ],
+				"cmd_script" :
+				[
+				 "source /root/mgrast_env.sh",
+				 "awe_preprocess.pl -input ${inputfile} -format fasta -out_prefix ${job_id}.100.preprocess -filter_options ${filter_options}"
+				 ],
+				"output_map" : {
+					"passed" : {
+						"filename" : "${job_id}.100.preprocess.passed.fna",
+						"attrfile": "${job_id}.100.preprocess.passed.fna.json",
+						"type": "subset",
+						"formoptions": {
+							"parent_node": "${inputfile.node}",
+							"parent_index": "record"
+						}
+					},
+					"removed" : {
+						"filename" : "${job_id}.100.preprocess.removed.fna",
+						"attrfile": "${job_id}.100.preprocess.removed.fna.json"
 					}
 				}
 			}
@@ -73,6 +108,53 @@
 					"removed" : {
 						"filename" : "${job_id}.150.dereplication.removed.fna",
 						"attrfile" : "${job_id}.150.dereplication.removed.fna.json"
+					}
+				}
+			}
+			
+		},
+		"annotate_sims" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "inputfile"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "job_id"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "ach_annotation_ver"
+						   }
+				],
+				"cmd_script" :
+				[
+				 "source /root/mgrast_env.sh",
+				 "awe_annotate_sims.pl -input=${inputfile} -out_prefix=${job_id}.650 -aa -ach_ver=${ach_annotation_ver} -ann_file=m5nr_v1.bdb"
+				 ],
+				"output_map" : {
+					"sims-filter" : {
+						"filename" : "${job_id}.650.aa.sims.filter",
+						"attrfile": "${job_id}.650.aa.sims.filter.json"
+					},
+					"expand-protein" : {
+						"filename" : "${job_id}.650.aa.expand.protein",
+						"attrfile": "${job_id}.650.aa.expand.protein.json"
+					},
+					"expand-lca" : {
+						"filename" : "${job_id}.650.aa.expand.lca",
+						"attrfile": "${job_id}.650.aa.expand.lca.json"
+					},
+					"expand-ontology" : {
+						"filename" : "${job_id}.650.aa.expand.ontology",
+						"attrfile": "${job_id}.650.aa.expand.ontology.json"
+					}
+				},
+				"predata": {
+					"m5nr_v1.bdb":{
+						"url": "[% m5nr_annotation_url %]"
 					}
 				}
 			}
