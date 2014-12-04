@@ -23,16 +23,18 @@
 				[
 				"awe_genecalling.pl -input=${inputfile} -out_prefix=${job_id}.350.genecalling.coding -type=${fgs_type} -size=100 -proc=8"
 				],
-				"outputs" : {
-						"appname",
+				"outputs" : [
+					{
+						"appname" : "faa",
 						"filename" : "${job_id}.350.genecalling.coding.faa",
 						"attrfile": "userattr.json"
 					},
-						"appname",
+					{
+						"appname" : "fna",
 						"filename" : "${job_id}.350.genecalling.coding.fna",
 						"attrfile": "userattr.json"
 					}
-				}
+				]
 			}
 		}
 	}
