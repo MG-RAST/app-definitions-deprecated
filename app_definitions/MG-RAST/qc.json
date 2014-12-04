@@ -30,20 +30,23 @@
 				 "source /root/mgrast_env.sh",
 				 "awe_qc.pl -input ${inputfile} -format ${file_format} -out_prefix ${job_id}.075 -assembled ${assembled} -filter_options ${filter_options} -proc 8"
 					],
-				"output_map" : {
-					"assembly-coverage" : {
+				"outputs" : [
+					{
+						"appname": "assembly.coverage",
 						"filename" : "${job_id}.075.assembly.coverage",
 						"attrfile" : "${job_id}.075.assembly.coverage.json"
 					},
-					"qc-stats" : {
+					{
+						"appname": "qc.stats",
 						"filename" : "${job_id}.075.qc.stats",
 						"attrfile" : "${job_id}.075.qc.stats.json"
 					},
-					"upload-stats" : {
+					{
+						"appname": "upload.stats",
 						"filename" : "${job_id}.075.upload.stats",
 						"attrfile" : "${job_id}.075.upload.stats.json"
 					}
-				}
+				]
 			}
 		}
 	}

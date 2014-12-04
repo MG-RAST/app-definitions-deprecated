@@ -25,12 +25,13 @@
 				[
 				 "awe_bowtie_screen.pl -input=${inputfile} -output=${job_id}.299.screen.passed.fna -index=${screen_indexes} -bowtie=${bowtie} -proc=8"
 				 ],
-				"output_map" : {
-					"passed" : {
-						"filename" : "[% job_id %].299.screen.passed.fna"
+				"outputs" : [
+					{
+					"appname" : "passed",
+					"filename" : "[${job_id}.299.screen.passed.fna"
 					}
 					
-				}
+				],
 				"predata" : {
 					"h_sapiens.2.bt2" : {
 						"url" : "http://shock.metagenomics.anl.gov/node/87eeeac0-b3df-4872-9a71-8f5a984a78f0?download"

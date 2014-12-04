@@ -25,17 +25,19 @@
 				 "source /root/mgrast_env.sh",
 				 "awe_preprocess.pl -input ${inputfile} -format fastq -out_prefix ${job_id}.100.preprocess -filter_options ${filter_options}"
 				 ],
-				"output_map" : {
-					"passed" : {
+				"outputs" : [
+					{
+						"appname" :"passed",
 						"filename" : "${job_id}.100.preprocess.passed.fna",
 						"attrfile": "${job_id}.100.preprocess.passed.fna.json",
 						"shockindex": "record"
 					},
-					"removed" : {
+					{
+						"appname" : "removed",
 						"filename" : "${job_id}.100.preprocess.removed.fna",
 						"attrfile": "${job_id}.100.preprocess.removed.fna.json"
 					}
-				}
+				[
 			},
 			"fasta" : {
 				"input" : [
@@ -58,8 +60,9 @@
 				 "source /root/mgrast_env.sh",
 				 "awe_preprocess.pl -input ${inputfile} -format fasta -out_prefix ${job_id}.100.preprocess -filter_options ${filter_options}"
 				 ],
-				"output_map" : {
-					"passed" : {
+				"outputs" : [
+					{
+				 		"appname" : "passed",
 						"filename" : "${job_id}.100.preprocess.passed.fna",
 						"attrfile": "${job_id}.100.preprocess.passed.fna.json",
 						"type": "subset",
@@ -68,7 +71,8 @@
 							"parent_index": "record"
 						}
 					},
-					"removed" : {
+					{
+				 		"appname" : "removed",
 						"filename" : "${job_id}.100.preprocess.removed.fna",
 						"attrfile": "${job_id}.100.preprocess.removed.fna.json"
 					}
@@ -100,16 +104,18 @@
 				 "source /root/mgrast_env.sh",
 				 "awe_dereplicate.pl -input=${inputfile} -out_prefix=${job_id}.150.dereplication -prefix_length=${prefix_length} -dereplicate=${dereplicate} -memory=20"
 				 ],
-				"output_map" : {
-					"passed" : {
+				"outputs" : [
+					{
+						"appname" : "passed",
 						"filename" : "${job_id}.150.dereplication.passed.fna",
 						"attrfile" : "${job_id}.150.dereplication.passed.fna.json"
 					},
-					"removed" : {
+					{
+						"appname" : "removed",
 						"filename" : "${job_id}.150.dereplication.removed.fna",
 						"attrfile" : "${job_id}.150.dereplication.removed.fna.json"
 					}
-				}
+					]
 			}
 			
 		},
@@ -134,24 +140,28 @@
 				 "source /root/mgrast_env.sh",
 				 "awe_annotate_sims.pl -input=${inputfile} -out_prefix=${job_id}.650 -aa -ach_ver=${ach_annotation_ver} -ann_file=m5nr_v1.bdb"
 				 ],
-				"output_map" : {
-					"sims-filter" : {
+				"outputs" : [
+					 {
+						"appname" :"sims-filter"
 						"filename" : "${job_id}.650.aa.sims.filter",
 						"attrfile": "${job_id}.650.aa.sims.filter.json"
 					},
-					"expand-protein" : {
+					{
+						"appname" :"expand-protein"
 						"filename" : "${job_id}.650.aa.expand.protein",
 						"attrfile": "${job_id}.650.aa.expand.protein.json"
 					},
-					"expand-lca" : {
+					{
+						"appname" :"expand-lca"
 						"filename" : "${job_id}.650.aa.expand.lca",
 						"attrfile": "${job_id}.650.aa.expand.lca.json"
 					},
-					"expand-ontology" : {
+					{
+						"appname" :"expand-ontology"
 						"filename" : "${job_id}.650.aa.expand.ontology",
 						"attrfile": "${job_id}.650.aa.expand.ontology.json"
 					}
-				},
+				],
 				"predata": {
 					"m5nr_v1.bdb":{
 						"url": "[% m5nr_annotation_url %]"
