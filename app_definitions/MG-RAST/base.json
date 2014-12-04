@@ -141,25 +141,25 @@
 				 "awe_annotate_sims.pl -input=${inputfile} -out_prefix=${job_id}.650 -aa -ach_ver=${ach_annotation_ver} -ann_file=m5nr_v1.bdb"
 				 ],
 				"outputs" : [
-					 {
-						"appname" :"sims-filter"
+					{
+						"appname"  : "sims.filter"
 						"filename" : "${job_id}.650.aa.sims.filter",
-						"attrfile": "${job_id}.650.aa.sims.filter.json"
+						"attrfile" : "${job_id}.650.aa.sims.filter.json"
 					},
 					{
-						"appname" :"expand-protein"
+						"appname"  : "expand.protein"
 						"filename" : "${job_id}.650.aa.expand.protein",
-						"attrfile": "${job_id}.650.aa.expand.protein.json"
+						"attrfile" : "${job_id}.650.aa.expand.protein.json"
 					},
 					{
-						"appname" :"expand-lca"
+						"appname"  : "expand.lca"
 						"filename" : "${job_id}.650.aa.expand.lca",
-						"attrfile": "${job_id}.650.aa.expand.lca.json"
+						"attrfile" : "${job_id}.650.aa.expand.lca.json"
 					},
 					{
-						"appname" :"expand-ontology"
+						"appname"  : "expand.ontology"
 						"filename" : "${job_id}.650.aa.expand.ontology",
-						"attrfile": "${job_id}.650.aa.expand.ontology.json"
+						"attrfile" : "${job_id}.650.aa.expand.ontology.json"
 					}
 				],
 				"predata": {
