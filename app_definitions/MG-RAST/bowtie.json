@@ -19,7 +19,7 @@
 						   {
 						   "type"	: "string",
 						   "name"	: "bowtie"
-						   },
+						   }
 						   ],
 				"cmd_script" :
 				[
