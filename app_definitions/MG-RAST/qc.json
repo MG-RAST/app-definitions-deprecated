@@ -32,17 +32,17 @@
 					],
 				"outputs" : [
 					{
-						"appname": "assembly.coverage",
+						"name": "assembly.coverage",
 						"filename" : "${job_id}.075.assembly.coverage",
 						"attrfile" : "${job_id}.075.assembly.coverage.json"
 					},
 					{
-						"appname": "qc.stats",
+						"name": "qc.stats",
 						"filename" : "${job_id}.075.qc.stats",
 						"attrfile" : "${job_id}.075.qc.stats.json"
 					},
 					{
-						"appname": "upload.stats",
+						"name": "upload.stats",
 						"filename" : "${job_id}.075.upload.stats",
 						"attrfile" : "${job_id}.075.upload.stats.json"
 					}

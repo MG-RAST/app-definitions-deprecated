@@ -25,12 +25,12 @@
 				],
 				"outputs" : [
 					{
-						"appname" : "faa",
+						"name" : "faa",
 						"filename" : "${job_id}.350.genecalling.coding.faa",
 						"attrfile": "userattr.json"
 					},
 					{
-						"appname" : "fna",
+						"name" : "fna",
 						"filename" : "${job_id}.350.genecalling.coding.fna",
 						"attrfile": "userattr.json"
 					}

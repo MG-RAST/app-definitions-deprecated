@@ -27,13 +27,13 @@
 				 ],
 				"outputs" : [
 					{
-						"appname" :"passed",
+						"name" :"passed",
 						"filename" : "${job_id}.100.preprocess.passed.fna",
 						"attrfile": "${job_id}.100.preprocess.passed.fna.json",
 						"shockindex": "record"
 					},
 					{
-						"appname" : "removed",
+						"name" : "removed",
 						"filename" : "${job_id}.100.preprocess.removed.fna",
 						"attrfile": "${job_id}.100.preprocess.removed.fna.json"
 					}
