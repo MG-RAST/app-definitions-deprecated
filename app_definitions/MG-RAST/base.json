@@ -37,7 +37,7 @@
 						"filename" : "${job_id}.100.preprocess.removed.fna",
 						"attrfile": "${job_id}.100.preprocess.removed.fna.json"
 					}
-				[
+				]
 			},
 			"fasta" : {
 				"input" : [
@@ -76,7 +76,7 @@
 						"filename" : "${job_id}.100.preprocess.removed.fna",
 						"attrfile": "${job_id}.100.preprocess.removed.fna.json"
 					}
-				}
+				]
 			}
 		},
 		"dereplicate" : {
@@ -142,22 +142,22 @@
 				 ],
 				"outputs" : [
 					{
-						"name"  : "sims.filter"
+						"name"  : "sims.filter",
 						"filename" : "${job_id}.650.aa.sims.filter",
 						"attrfile" : "${job_id}.650.aa.sims.filter.json"
 					},
 					{
-						"name"  : "expand.protein"
+						"name"  : "expand.protein",
 						"filename" : "${job_id}.650.aa.expand.protein",
 						"attrfile" : "${job_id}.650.aa.expand.protein.json"
 					},
 					{
-						"name"  : "expand.lca"
+						"name"  : "expand.lca",
 						"filename" : "${job_id}.650.aa.expand.lca",
 						"attrfile" : "${job_id}.650.aa.expand.lca.json"
 					},
 					{
-						"name"  : "expand.ontology"
+						"name"  : "expand.ontology",
 						"filename" : "${job_id}.650.aa.expand.ontology",
 						"attrfile" : "${job_id}.650.aa.expand.ontology.json"
 					}
