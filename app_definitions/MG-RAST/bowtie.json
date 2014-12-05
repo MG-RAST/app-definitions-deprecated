@@ -23,6 +23,7 @@
 						   ],
 				"cmd_script" :
 				[
+				 "source /root/mgrast_env.sh",
 				 "awe_bowtie_screen.pl -input=${inputfile} -output=${job_id}.299.screen.passed.fna -index=${screen_indexes} -bowtie=${bowtie} -proc=8"
 				 ],
 				"outputs" : [
