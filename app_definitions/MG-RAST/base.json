@@ -62,7 +62,7 @@
 				 ],
 				"outputs" : [
 					{
-				 		"appname" : "passed",
+				 		"name" : "passed",
 						"filename" : "${job_id}.100.preprocess.passed.fna",
 						"attrfile": "${job_id}.100.preprocess.passed.fna.json",
 						"type": "subset",
@@ -72,7 +72,7 @@
 						}
 					},
 					{
-				 		"appname" : "removed",
+				 		"name" : "removed",
 						"filename" : "${job_id}.100.preprocess.removed.fna",
 						"attrfile": "${job_id}.100.preprocess.removed.fna.json"
 					}
@@ -106,12 +106,12 @@
 				 ],
 				"outputs" : [
 					{
-						"appname" : "passed",
+						"name" : "passed",
 						"filename" : "${job_id}.150.dereplication.passed.fna",
 						"attrfile" : "${job_id}.150.dereplication.passed.fna.json"
 					},
 					{
-						"appname" : "removed",
+						"name" : "removed",
 						"filename" : "${job_id}.150.dereplication.removed.fna",
 						"attrfile" : "${job_id}.150.dereplication.removed.fna.json"
 					}
@@ -142,22 +142,22 @@
 				 ],
 				"outputs" : [
 					{
-						"appname"  : "sims.filter"
+						"name"  : "sims.filter"
 						"filename" : "${job_id}.650.aa.sims.filter",
 						"attrfile" : "${job_id}.650.aa.sims.filter.json"
 					},
 					{
-						"appname"  : "expand.protein"
+						"name"  : "expand.protein"
 						"filename" : "${job_id}.650.aa.expand.protein",
 						"attrfile" : "${job_id}.650.aa.expand.protein.json"
 					},
 					{
-						"appname"  : "expand.lca"
+						"name"  : "expand.lca"
 						"filename" : "${job_id}.650.aa.expand.lca",
 						"attrfile" : "${job_id}.650.aa.expand.lca.json"
 					},
 					{
-						"appname"  : "expand.ontology"
+						"name"  : "expand.ontology"
 						"filename" : "${job_id}.650.aa.expand.ontology",
 						"attrfile" : "${job_id}.650.aa.expand.ontology.json"
 					}
