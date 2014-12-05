@@ -29,7 +29,12 @@
 				"outputs" : [
 					{
 					"name" : "passed",
-					"filename" : "${job_id}.299.screen.passed.fna"
+					"filename" : "${job_id}.299.screen.passed.fna",
+					"type": "subset",
+					"formoptions": {
+						"parent_name": "${inputfile}",
+						"parent_index": "record"
+						}
 					}
 					
 				],
