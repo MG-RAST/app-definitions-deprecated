@@ -1,8 +1,8 @@
 {
 	"dockerimage" : "skyport/diamond:latest",
 	"commands" : {
-		"bowtie" : {
-			"default" : {
+		"search" : {
+			"blastx" : {
 				"input" : [
 						   {
 						   "type"	: "file",
