@@ -1,0 +1,34 @@
+{
+	"dockerimage" : "skyport/diamond:latest",
+	"commands" : {
+		"bowtie" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "inputfile"
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "dbfile",
+						   "cache" : true
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "job_id"
+						   }
+						   ],
+				"cmd_script" :
+				[
+				 "diamond blastx -d ${dbfile} -q ${inputfile} -o ${job_id}.diamond --threads ${NumCPU}"
+				 ],
+				"outputs" : [
+					{
+					"name" : "result",
+					"filename" : "${job_id}.diamond"
+				]
+			}
+		}
+		
+	}
+}
