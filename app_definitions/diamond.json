@@ -6,12 +6,13 @@
 				"input" : [
 						   {
 						   "type"	: "file",
-						   "name"	: "inputfile"
+						   "name"	: "query"
 						   },
 						   {
 						   "type"	: "file",
 						   "name"	: "dbfile",
-						   "cache" : true
+						   "cache" : true,
+						   "description" : "filename must have suffix .dmnd !"
 						   },
 						   {
 						   "type"	: "string",
@@ -20,7 +21,7 @@
 						   ],
 				"cmd_script" :
 				[
-				 "diamond blastx -d ${dbfile} -q ${inputfile} -o ${job_id}.diamond --threads ${NumCPU}"
+				 "diamond blastx -d ${remove_extension:dbfile} -q ${query} -o ${job_id}.diamond --threads ${NumCPU}"
 				 ],
 				"outputs" : [
 					{
