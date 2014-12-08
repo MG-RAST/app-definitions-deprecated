@@ -13,20 +13,16 @@
 						   "name"	: "dbfile",
 						   "cache" : true,
 						   "description" : "filename must have suffix .dmnd !"
-						   },
-						   {
-						   "type"	: "string",
-						   "name"	: "job_id"
 						   }
 						   ],
 				"cmd_script" :
 				[
-				 "diamond blastx -d ${remove_extension:dbfile} -q ${query} -o ${job_id}.diamond --threads ${NumCPU}"
+				 "diamond blastx -d ${remove_extension:dbfile} -q ${query} -o ${remove_extension:query}.diamond --threads ${NumCPU}"
 				 ],
 				"outputs" : [
 					{
 					"name" : "result",
-					"filename" : "${job_id}.diamond"
+					"filename" : "${remove_extension:query}.diamond"
 					}
 				]
 			}
