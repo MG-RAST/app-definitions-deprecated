@@ -1,0 +1,62 @@
+{
+	"dockerimage" : "mgrast/ebi-submitter:latest",
+	"commands" : {
+		"create_xml" : {
+			"default" : {
+				"sigil" : "--",
+				"input" : [
+						   {
+						   "type"	: "string",
+						   "name"	: "project_id"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "url"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "submission_url"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "user"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "password"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "auth"
+						   },
+						   {
+						   "type"	: "string",
+						   "name"	: "skip"
+						   },
+						   {
+						   "type"	: "bool",
+						   "name"	: "submit"
+						   },
+						   {
+						   "type"	: "bool",
+						   "name"	: "verbose"
+						   },
+						   {
+						   "type"	: "bool",
+						   "name"	: "no_upload"
+						   },
+						   {
+						   "type"	: "bool",
+						   "name"	: "validate"
+						   }
+						   ],
+				"cmd_script" :
+				[
+				 "create_xml.pl ${arguments}",
+				 ],
+				"outputs" : []
+			}
+		}
+		
+	}
+}
