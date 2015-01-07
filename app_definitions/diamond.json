@@ -17,12 +17,12 @@
 						   ],
 				"cmd_script" :
 					[
-					"diamond blastx -d ${remove_extension:dbfile} -q ${query} -o ${remove_extension:query}.diamond --threads ${NumCPU}"
+					"diamond blastx -d ${remove_extension:${dbfile}} -q ${query} -o ${remove_extension:query}.diamond --threads ${NumCPU}"
 					],
 				"outputs" : [
 					{
 					"name" : "result",
-					"filename" : "${remove_extension:query}.diamond"
+					"filename" : "${remove_extension:${query}}.diamond"
 					}
 				]
 			}
@@ -37,12 +37,12 @@
 				],
 				"cmd_script" :
 					[
-					"diamond makedb --in ${INPUT} --db ${remove_extension:INPUT} --threads ${NumCPU}"
+					"diamond makedb --in ${INPUT} --db ${remove_extension:${INPUT}} --threads ${NumCPU}"
 					],
 				"outputs" : [
 					{
 							 "name" : "diamond-db",
-							 "filename" : "${remove_extension:INPUT}.dmnd"
+							 "filename" : "${remove_extension:${INPUT}}.dmnd"
 					}
 				]
 			}
