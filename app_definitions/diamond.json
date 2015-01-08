@@ -17,7 +17,7 @@
 						   ],
 				"cmd_script" :
 					[
-					"diamond blastx -d ${remove_extension:${dbfile}} -q ${query} -o ${remove_extension:query}.diamond --threads ${NumCPU}"
+					"diamond blastx -d ${remove_extension:${dbfile}} -q ${query} -o ${remove_extension:${query}}.diamond --threads ${NumCPU}"
 					],
 				"outputs" : [
 					{
