@@ -19,5 +19,5 @@ RUN go get github.com/MG-RAST/AWE/...
 #Until here AWE Server and AWE Client Dockerfiles are identical. The
 # following RUN command is AWE Server specific:
 
-RUN apt-get install -y mongodb-server ; \
+RUN apt-get install -y mongodb-server && \
 	rm -f /usr/sbin/policy-rc.d #do not start mongo db automatically

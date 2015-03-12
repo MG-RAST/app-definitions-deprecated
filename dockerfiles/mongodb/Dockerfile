@@ -3,5 +3,5 @@
 FROM ubuntu:14.04
 
 RUN apt-get install -y \
-	mongodb-server ; \
+	mongodb-server && \
 	rm -f /usr/sbin/policy-rc.d #do not start mongo db automatically
