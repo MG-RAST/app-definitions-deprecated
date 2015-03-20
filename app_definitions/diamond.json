@@ -17,7 +17,8 @@
 						   ],
 				"cmd_script" :
 					[
-					"diamond blastx -d ${remove_extension:${dbfile}} -q ${query} -o ${remove_extension:${query}}.diamond --threads ${NumCPU}"
+					"mkdir -p /workdir/tmp/",
+					"diamond blastx --tmpdir=/workdir/tmp/ -d ${remove_extension:${dbfile}} -q ${query} -o ${remove_extension:${query}}.diamond --threads ${NumCPU}"
 					],
 				"outputs" : [
 					{
