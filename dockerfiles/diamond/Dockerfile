@@ -2,12 +2,13 @@
 
 FROM ubuntu:14.10
 RUN apt-get update && apt-get install -y build-essential libboost-all-dev
-ADD http://www-ab.informatik.uni-tuebingen.de/data/software/diamond/download/public/diamond.tar.gz /
-RUN tar xzf diamond.tar.gz && \
-	cd diamond && \
+ADD https://github.com/bbuchfink/diamond/archive/v0.7.9.tar.gz /
+RUN cd / && \
+	tar xzf v0.7.9.tar.gz && \
+	cd /diamond-0.7.9/src/ && \
 	./configure &&\
 	make && \
-	make install
+	cp /diamond-0.7.9/bin/* /usr/local/bin/
 
 
 
