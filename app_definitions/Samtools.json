@@ -1,5 +1,5 @@
 {
-	"dockerimage" : "skyport/cap:20141029",
+	"dockerimage" : "skyport/samtools:1.2",
 	"commands" : {
 		"samtools" : {
 			"view" : {
