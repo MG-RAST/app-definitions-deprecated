@@ -6,7 +6,6 @@ ADD https://github.com/bbuchfink/diamond/archive/v0.7.9.tar.gz /
 RUN cd / && \
 	tar xzf v0.7.9.tar.gz && \
 	cd /diamond-0.7.9/src/ && \
-	./configure &&\
 	make && \
 	cp /diamond-0.7.9/bin/* /usr/local/bin/
 
