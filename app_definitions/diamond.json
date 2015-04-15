@@ -18,7 +18,7 @@
 				"cmd_script" :
 					[
 					"mkdir -p /workdir/tmp/",
-					"diamond blastx --tmpdir=/workdir/tmp/ --db ${remove_extension:${dbfile}} --query=${query} --daa=${remove_extension:${query}}.daa --threads=${NumCPU} --block-size=2",
+					"diamond blastx --tmpdir=/workdir/tmp/ --db ${remove_extension:${dbfile}} --query=${query} --daa=${remove_extension:${query}}.daa --threads=${NumCPU}",
 					"diamond view --daa=${remove_extension:${query}}.daa --out=${remove_extension:${query}}.m8 --outfmt=tab"
 					],
 				"outputs" : [
@@ -39,7 +39,7 @@
 				],
 				"cmd_script" :
 					[
-					"diamond makedb --in ${INPUT} --db ${remove_extension:${INPUT}} --threads ${NumCPU}"
+					"diamond makedb --in ${INPUT} --db ${remove_extension:${INPUT}} --threads ${NumCPU} --block-size=2"
 					],
 				"outputs" : [
 					{
