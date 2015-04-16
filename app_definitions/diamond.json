@@ -24,7 +24,7 @@
 				"outputs" : [
 					{
 					"name" : "result",
-					"filename" : "${remove_extension:${query}}.diamond"
+					"filename" : "${remove_extension:${query}}.m8"
 					}
 				]
 			}
