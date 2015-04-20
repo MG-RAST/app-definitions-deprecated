@@ -138,12 +138,18 @@
 						   {
 						   "type"	: "string",
 						   "name"	: "ach_annotation_ver"
+						   },
+						   {
+						   "type" 	: "file",
+						   "name"	: "m5nr_annotation_bdb",
+						   "cache"	: true,
+						   "description" : "berkley db for m5nr annotations"
 						   }
 				],
 				"cmd_script" :
 				[
 				 "source /root/mgrast_env.sh",
-				 "awe_annotate_sims.pl -input=${inputfile} -out_prefix=${job_id}.650 -aa -ach_ver=${ach_annotation_ver} -ann_file=m5nr_v1.bdb"
+				 "awe_annotate_sims.pl -input=${inputfile} -out_prefix=${job_id}.650 -aa -ach_ver=${ach_annotation_ver} -ann_file=${m5nr_annotation_bdb}"
 				 ],
 				"outputs" : [
 					{
@@ -166,12 +172,7 @@
 						"filename" : "${job_id}.650.aa.expand.ontology",
 						"attrfile" : "${job_id}.650.aa.expand.ontology.json"
 					}
-				],
-				"predata": {
-					"m5nr_v1.bdb":{
-						"url": "[% m5nr_annotation_url %]"
-					}
-				}
+				]
 			}
 			
 		}
