@@ -1,4 +1,4 @@
-# AWE Client
+# AWE worker and server (for a server with mongodb, please use the awe-server Dockerfile)
 
 FROM ubuntu:14.04
 
