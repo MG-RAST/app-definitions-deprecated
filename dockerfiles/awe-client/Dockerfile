@@ -1,17 +1,23 @@
 # AWE Client
 
-# Note that AWE Server and AWE Client Dockerfiles are nearly identical. This allows to reuse cached image layers when building the images.
-
-
 FROM ubuntu:14.04
 
 RUN apt-get update && apt-get install -y \
-	golang \
-	git \
+	git-core \
 	bzr \
 	make \
 	gcc \
-	mercurial
+	mercurial \
+	ca-certificates \
+	curl
 
+
+RUN curl -s https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz | tar -v -C /usr/local -xz
+
+ENV GOROOT /usr/local/go
+ENV PATH /usr/local/go/bin:/go/bin:/usr/local/bin:$PATH
 ENV GOPATH /gopath/
+
 RUN go get github.com/MG-RAST/AWE/...
+
+CMD ["bash"]
