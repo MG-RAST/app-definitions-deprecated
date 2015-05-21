@@ -1,0 +1,129 @@
+{
+  "dockerimage": "m5nr/mapping:0.1",
+  "commands": {
+    "debug": {
+      "default": {
+        "input" :[
+            {
+              "type" : "string" ,
+              "name" : "MESSAGE" ,
+              "description" : "Debug message" ,
+              "defaul_value" : "This is a test message!"
+            }
+          ],
+        "cmd_script": [
+          "echo ${MESSAGE}"
+        ],
+        "output_array": [
+          "awe_stdout.txt"
+        ]
+      }
+    },
+    "sims2annotation": {
+      "default": {
+        "input": [
+          {
+            "type": "file",
+            "name": "SIMS",
+            "description": "input sims file"
+          },
+          {
+            "type" : "file" ,
+            "name" : "DBFILE" ,
+            "description" : "Berkeley DB file with md5 to id/function/org mapping"
+          },
+          { 
+            "type" : "string",
+            "name" : "SOURCE",
+            "description" : "Name of data source for mapping."
+          }
+        ],
+        "cmd_script": [
+          "perl ~/scripts/perl/sims2annotation.batch.pl -sims ${SIMS} -dbfile ${DBFILE} -source ${SOURCE} -verbose 1 1> ${SIMS}.mapped 2> error.log"
+        ],
+        "output_array": [
+          "${SIMS}.mapped"
+        ]
+      }
+    },
+    "splitBySource": {
+      "default": {
+        "input": [
+          {
+            "type": "file",
+            "name": "MAPPED_SIMS",
+            "description": "A sims file with annotations from multiple sources"
+          },
+          {
+            "type": "string",
+            "name": "SOURCE",
+            "description": "source name for splitting"
+          },
+          {
+            "type" : "string",
+            "name" : "EXCLUDE",
+            "description" : "if set exclude source name from hits",
+            "default_value" : "-v" ,
+            "optional" : true
+          }
+        ],
+        "cmd_script": [
+          "fgrep ${EXCLUDE} ${SOURCE} ${MAPPED_SIMS} > ${MAPPED_SIMS}.filtered"
+        ],
+        "output_array": [
+          "${MAPPED_SIMS}.filtered"
+        ]
+      }
+    },
+    "sims2hits": {
+      "default": {
+        "input": [
+          {
+            "type": "file",
+            "name": "SIMS",
+            "description" : "annotated sims file"
+          },
+          {
+            "type": "string",
+            "name": "HIT",
+            "description": "Method to compute hit for read from sims",
+            "default_value" : "first" ,
+            "optional": true
+          },
+          {
+            "type" : "string" ,
+            "name" : "FORMAT" ,
+            "default_value" : "read2md52func",
+            "description" : "input format of sims file"
+          }
+        ],
+        "cmd_script": [
+          "perl ~/scripts/perl/sims2hits.pl -sims ${SIMS} -type ${HIT} -format ${FORMAT} > ${SIMS}.top_hit"
+        ],
+        "output_array": [
+          "${SIMS}.top_hit"
+        ]
+      }
+    },
+    "hits2summary" : {
+      "md5" : {
+        "input" : [
+            {
+              "type" : "file" ,
+              "name" : "FILE" ,
+              "description" : "file to be sorted"
+            }
+          ],
+          "output" : [
+            "md5.summary"
+            ],
+        "cmd_script" : [
+          "sort -t $'\t' -k 1,1 ${FILE} > ${FILE}.md5.sorted" ,
+          "perl ~/scripts/perl/hits2summary.pl -file ${FILE}.md5.sorted -annotation 1 -type free > md5.summary"
+          ]
+      },
+      "function" : {},
+      "organism" : {}
+    }
+  }
+}
