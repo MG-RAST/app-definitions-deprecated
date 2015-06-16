@@ -30,6 +30,7 @@
           {
             "type" : "file" ,
             "name" : "DBFILE" ,
+			"cache" : 1 ,
             "description" : "Berkeley DB file with md5 to id/function/org mapping"
           },
           { 
@@ -114,7 +115,7 @@
               "description" : "file to be sorted"
             }
           ],
-          "output" : [
+          "output_array" : [
             "md5.summary"
             ],
         "cmd_script" : [
