@@ -30,7 +30,6 @@
           {
             "type" : "file" ,
             "name" : "DBFILE" ,
-			"cache" : true ,
             "description" : "Berkeley DB file with md5 to id/function/org mapping"
           },
           { 
