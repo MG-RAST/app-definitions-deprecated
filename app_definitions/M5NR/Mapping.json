@@ -135,7 +135,7 @@
               ],
           "cmd_script" : [
             "sort -t $'\t' -k 6,6 ${FILE} > ${FILE}.function.sorted" ,
-            "perl ~/scripts/perl/hits2summary.pl -file ${FILE}.function.sorted -annotation 1 -type free > function.summary"
+            "perl ~/scripts/perl/hits2summary.pl -file ${FILE}.function.sorted -annotation 6 -type free > function.summary"
             ]
       },
       "organism" : {
@@ -151,7 +151,7 @@
               ],
           "cmd_script" : [
             "sort -t $'\t' -k 7,7 ${FILE} > ${FILE}.organism.sorted" ,
-            "perl ~/scripts/perl/hits2summary.pl -file ${FILE}.organism.sorted -annotation 1 -type free > organism.summary"
+            "perl ~/scripts/perl/hits2summary.pl -file ${FILE}.organism.sorted -annotation 7 -type free > organism.summary"
             ]
 		}
     }
