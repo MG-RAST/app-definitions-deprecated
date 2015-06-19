@@ -122,8 +122,38 @@
           "perl ~/scripts/perl/hits2summary.pl -file ${FILE}.md5.sorted -annotation 1 -type free > md5.summary"
           ]
       },
-      "function" : {},
-      "organism" : {}
+      "function" : {
+          "input" : [
+              {
+                "type" : "file" ,
+                "name" : "FILE" ,
+                "description" : "file to be sorted"
+              }
+            ],
+            "output_array" : [
+              "function.summary"
+              ],
+          "cmd_script" : [
+            "sort -t $'\t' -k 6,6 ${FILE} > ${FILE}.function.sorted" ,
+            "perl ~/scripts/perl/hits2summary.pl -file ${FILE}.function.sorted -annotation 1 -type free > function.summary"
+            ]
+      },
+      "organism" : {
+		  "input" : [
+              {
+                "type" : "file" ,
+                "name" : "FILE" ,
+                "description" : "file to be sorted"
+              }
+            ],
+            "output_array" : [
+              "function.summary"
+              ],
+          "cmd_script" : [
+            "sort -t $'\t' -k 7,7 ${FILE} > ${FILE}.organism.sorted" ,
+            "perl ~/scripts/perl/hits2summary.pl -file ${FILE}.organism.sorted -annotation 1 -type free > organism.summary"
+            ]
+		}
     }
   }
 }
