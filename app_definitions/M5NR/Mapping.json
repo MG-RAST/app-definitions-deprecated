@@ -147,7 +147,7 @@
               }
             ],
             "output_array" : [
-              "function.summary"
+              "organism.summary"
               ],
           "cmd_script" : [
             "sort -t $'\t' -k 7,7 ${FILE} > ${FILE}.organism.sorted" ,
