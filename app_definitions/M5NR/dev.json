@@ -40,6 +40,37 @@
 				"output_array" : [
 					 "files.txt"
 				]
+			},
+			"write2file" : {
+				"input" : [
+				           {
+				             "type": "string",
+				             "name": "TEXT",
+				             "description": "File name",
+				             "default_value" : "test.txt" ,
+				             "optional": true
+				           },
+						   { 
+							   "type": "file",
+							   "name": "IN",
+							   "description" : "input file",
+							   "default_value" : "" ,
+							   "optional": false
+						   },
+						   {
+							   "type": "string",
+							   "name": "OUT",
+							   "description":"output filename",
+							   "optional":false	
+						   }
+						   ],
+				"cmd_script" :
+					[
+					"perl ~/scripts/perl/write2file.pl -out ${OUT} -verbose -text \"${TEXT}\" -input ${IN} "
+					],
+				"output_array" : [
+					 "${OUT}"
+				]
 			}
 		}
 	}
