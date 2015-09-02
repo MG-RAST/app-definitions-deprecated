@@ -22,6 +22,24 @@
 					"filename" : "files.txt"
 					}
 				]
+			},
+			"ls2" : {
+				"input" : [
+				           {
+				             "type": "string",
+				             "name": "PATH",
+				             "description": "Directory path",
+				             "default_value" : "./" ,
+				             "optional": true
+				           }
+						   ],
+				"cmd_script" :
+					[
+					"ls -ltr ${PATH} > files.txt"
+					],
+				"output_array" : [
+					 "files.txt"
+				]
 			}
 		}
 	}
