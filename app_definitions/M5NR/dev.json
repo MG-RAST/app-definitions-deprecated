@@ -1,0 +1,53 @@
+{
+	"dockerimage" : "skyport/diamond:latest",
+	"commands" : {
+		"search" : {
+			"blastx" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "query"
+						   },
+						   {
+						   "type"	: "file",
+						   "name"	: "dbfile",
+						   "cache" : true,
+						   "description" : "filename must have suffix .dmnd !"
+						   }
+						   ],
+				"cmd_script" :
+					[
+					"mkdir -p /workdir/tmp/",
+					"diamond blastx --tmpdir=/workdir/tmp/ --db ${remove_extension:${dbfile}} --query=${query} --daa=${remove_extension:${query}}.daa --threads=${NumCPU}",
+					"diamond view --daa=${remove_extension:${query}}.daa --out=${remove_extension:${query}}.m8 --outfmt=tab"
+					],
+				"outputs" : [
+					{
+					"name" : "result",
+					"filename" : "${remove_extension:${query}}.m8"
+					}
+				]
+			}
+		},
+		"makedb" : {
+			"default" : {
+				"input" : [
+						   {
+						   "type"	: "file",
+						   "name"	: "INPUT"
+						   }
+				],
+				"cmd_script" :
+					[
+					"diamond makedb --in ${INPUT} --db ${remove_extension:${INPUT}} --threads ${NumCPU} --block-size=2"
+					],
+				"outputs" : [
+					{
+							 "name" : "diamond-db",
+							 "filename" : "${remove_extension:${INPUT}}.dmnd"
+					}
+				]
+			}
+		}
+	}
+}
