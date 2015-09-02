@@ -14,7 +14,7 @@
 						   ],
 				"cmd_script" :
 					[
-					"ls -ltr ${PATH} > files.txt",
+					"ls -ltr ${PATH} > files.txt"
 					],
 				"outputs" : [
 					{
