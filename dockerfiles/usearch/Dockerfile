@@ -1,5 +1,5 @@
 
-FROM ubuntu
+FROM debian:jessie 
 #FROM scratch # This works, but is not yet supported by AWE as it requires bash
 
 ADD ./usearch /
