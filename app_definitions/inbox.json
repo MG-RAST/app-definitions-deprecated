@@ -1,0 +1,126 @@
+{
+    "dockerimage": "amplicon/inbox:0.1",
+    "commands": {
+	"sequenceStats": {
+	    "default": {
+		"input" :[
+		    {
+			"type" : "file" ,
+			"name" : "SEQ-FILE" ,
+			"description" : "sequence file to run statistics on" ,
+			"defaul_value" : ""
+		    },
+		    {
+			"type" : "string" ,
+			"name" : "FILE-TYPE" ,
+			"description" : "type of sequence file (fasta or fastq)" ,
+			"defaul_value" : "fastq"
+		    }
+		],
+		"cmd_script": [
+		    "awe_seq_length_stats.pl -input=@${SEQ-FILE} -input_json=input_attr.json -output_json=output_attr.json -type=${FILE-TYPE}"
+		],
+		"outputs": [
+		    {
+			"name" :"SEQ-FILE",
+			"filename" : "${SEQ-FILE}",
+			"attrfile": "output_attr.json"
+		    }
+		]
+	    }
+	},
+	"sffToFastQ": {
+	    "default": {
+		"input" :[
+		    {
+			"type" : "file" ,
+			"name" : "SFF-FILE" ,
+			"description" : "sff-file to be converted to fastq" ,
+			"defaul_value" : ""
+		    },
+		    {
+			"type" : "string" ,
+			"name" : "FASTQ-FILE" ,
+			"description" : "output fastq file name" ,
+			"defaul_value" : ""
+		    }
+		],
+		"cmd_script": [
+		    "sff_extract_0_2_8 -Q @${SFF-FILE} -s ${FASTQ-FILE}"
+		],
+		"outputs": [
+		    {
+			"name": "FASTQ-FILE",
+			"filename": "${FASTQ-FILE}"
+		    }
+		]
+	    }
+	},
+	"pairJoin": {
+	    "default": {
+		"input" :[
+		    {
+			"type" : "file" ,
+			"name" : "SEQ-FILE-1" ,
+			"description" : "first sequence file to be joined",
+			"defaul_value" : ""
+		    },
+		    {
+			"type" : "file" ,
+			"name" : "SEQ-FILE-2" ,
+			"description" : "second sequence file to be joined" ,
+			"defaul_value" : ""
+		    },
+		    {
+			"type" : "string" ,
+			"name" : "RETAIN" ,
+			"description" : "If true retain non-overlapping sequences, default is false" ,
+			"defaul_value" : ""
+		    },
+		    {
+			"type" : "string" ,
+			"name" : "OUTFILE" ,
+			"description" : "output file name" ,
+			"defaul_value" : ""
+		    }
+		],
+		"cmd_script": [
+		    "pairend_join.py ${RETAIN}-m 8 -p 10 -t . -o ${OUTFILE}.fastq @${SEQ-FILE-1} @${SEQ-FILE-2}"
+		],
+		"outputs": [
+		    {
+			"name" :"OUTFILE",
+			"filename" : "${OUT-FILE}"
+		    }
+		]
+	    }
+	},
+	"demultiplex": {
+	    "default": {
+		"input": [
+		    {
+			"type": "string",
+			"name": "FILE-TYPE",
+			"description": "type of the sequence file"
+		    },
+		    {
+			"type" : "file" ,
+			"name" : "BAR-FILE" ,
+			"description" : "the barcode file"
+		    },
+		    {
+			"type" : "file" ,
+			"name" : "SEQ-FILE" ,
+			"description" : "the sequence file to be demultiplexed"
+		    }
+		],
+		"cmd_script": [
+		    "demultiplex.py -f ${FILE-TYPE} -b @${BAR-FILE} -i @${SEQ-FILE}"
+		],
+		"outputs": [
+		    ${OUTPUTS}
+		]
+	    }
+	}
+    }
+}
