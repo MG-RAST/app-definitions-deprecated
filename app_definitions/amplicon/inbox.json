@@ -94,33 +94,6 @@
 		    }
 		]
 	    }
-	},
-	"demultiplex": {
-	    "default": {
-		"input": [
-		    {
-			"type": "string",
-			"name": "FILE-TYPE",
-			"description": "type of the sequence file"
-		    },
-		    {
-			"type" : "file" ,
-			"name" : "BAR-FILE" ,
-			"description" : "the barcode file"
-		    },
-		    {
-			"type" : "file" ,
-			"name" : "SEQ-FILE" ,
-			"description" : "the sequence file to be demultiplexed"
-		    }
-		],
-		"cmd_script": [
-		    "demultiplex.py -f ${FILE-TYPE} -b @${BAR-FILE} -i @${SEQ-FILE}"
-		],
-		"outputs": [
-		    ${OUTPUTS}
-		]
-	    }
 	}
     }
 }
