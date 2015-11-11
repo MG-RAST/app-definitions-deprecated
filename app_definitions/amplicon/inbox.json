@@ -18,7 +18,7 @@
 		    }
 		],
 		"cmd_script": [
-		    "awe_seq_length_stats.pl -input=@${SEQ-FILE} -input_json=input_attr.json -output_json=output_attr.json -type=${FILE-TYPE}"
+		    "/awe_seq_length_stats.pl -input=@${SEQ-FILE} -input_json=input_attr.json -output_json=output_attr.json -type=${FILE-TYPE}"
 		],
 		"outputs": [
 		    {
@@ -46,7 +46,7 @@
 		    }
 		],
 		"cmd_script": [
-		    "sff_extract_0_2_8 -Q @${SFF-FILE} -s ${FASTQ-FILE}"
+		    "/sff_extract_0_2_8 -Q @${SFF-FILE} -s ${FASTQ-FILE}"
 		],
 		"outputs": [
 		    {
@@ -85,7 +85,7 @@
 		    }
 		],
 		"cmd_script": [
-		    "pairend_join.py ${RETAIN}-m 8 -p 10 -t . -o ${OUTFILE}.fastq @${SEQ-FILE-1} @${SEQ-FILE-2}"
+		    "/pairend_join.py ${RETAIN}-m 8 -p 10 -t . -o ${OUTFILE}.fastq @${SEQ-FILE-1} @${SEQ-FILE-2}"
 		],
 		"outputs": [
 		    {
