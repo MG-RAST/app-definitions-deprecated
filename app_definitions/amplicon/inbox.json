@@ -1,5 +1,5 @@
 {
-    "dockerimage": "amplicon/inbox:0.1",
+    "dockerimage": "amplicon/inbox:0.2",
     "commands": {
 	"sequenceStats": {
 	    "default": {
